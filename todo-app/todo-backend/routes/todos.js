@@ -4,11 +4,11 @@ const { Todo } = require('../mongo')
 const { setAsync, getAsync } = require('../redis')
 const router = express.Router()
 
-;(async () => {
-  const todoCount = await Todo.countDocuments()
-  await setAsync('addedTodos', todoCount)
-  console.log('todos reset to', todoCount)
-})()
+// ;(async () => {
+//   const todoCount = await Todo.countDocuments()
+//   await setAsync('addedTodos', todoCount)
+//   console.log('todos reset to', todoCount)
+// })()
 
 /* GET todos listing. */
 router.get('/', async (_, res) => {
