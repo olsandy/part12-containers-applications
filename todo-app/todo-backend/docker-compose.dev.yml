@@ -12,6 +12,7 @@ services:
       - ./mongo_data:/data/db
   redis:
     image: redis
+    restart: always
     ports:
       - '6379:6379'
 

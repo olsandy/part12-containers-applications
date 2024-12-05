@@ -1,7 +1,15 @@
 const express = require('express')
 const ObjectId = require('mongoose').Types.ObjectId
 const { Todo } = require('../mongo')
+const { setAsync } = require('../redis')
 const router = express.Router()
+
+let todoCount
+;(async () => {
+  todoCount = await Todo.countDocuments()
+  await setAsync('addedTodos', todoCount)
+  console.log('todos reset to', todoCount)
+})()
 
 /* GET todos listing. */
 router.get('/', async (_, res) => {
@@ -11,6 +19,8 @@ router.get('/', async (_, res) => {
 
 /* POST todo to listing. */
 router.post('/', async (req, res) => {
+  todoCount++
+  await setAsync('addedTodos', todoCount)
   const todo = await Todo.create({
     text: req.body.text,
     done: false,
@@ -34,7 +44,10 @@ const findByIdMiddleware = async (req, res, next) => {
 
 /* DELETE todo. */
 singleRouter.delete('/', async (req, res) => {
-  await req.todo.delete()
+  todoCount--
+  await setAsync('addedTodos', todoCount)
+  const deleted = await req.todo.delete()
+  console.log('deleted:', deleted)
   res.sendStatus(200)
 })
 
