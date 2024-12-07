@@ -17,6 +17,19 @@ services:
       - '6379:6379'
     volumes:
       - redis_data:/data
+  server:
+    image: todo-back-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000
+    container_name: todo-back-dev
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGO_URL=mongodb://mongo:27017
 
 volumes:
   mongo_data:
