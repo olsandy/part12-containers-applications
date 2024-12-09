@@ -6,7 +6,7 @@ const Todo = ({ todo, onClickComplete, onClickDelete }) => {
         <button onClick={onClickDelete(todo)}> Delete </button>
       </span>
     </>
-  );
+  )
 
   const notDoneInfo = (
     <>
@@ -16,7 +16,7 @@ const Todo = ({ todo, onClickComplete, onClickDelete }) => {
         <button onClick={onClickComplete(todo)}> Set as done </button>
       </span>
     </>
-  );
+  )
 
   return (
     <div
@@ -30,7 +30,7 @@ const Todo = ({ todo, onClickComplete, onClickDelete }) => {
       <span>{todo.text}</span>
       {todo.done ? doneInfo : notDoneInfo}
     </div>
-  );
-};
+  )
+}
 
-export default Todo;
+export default Todo
