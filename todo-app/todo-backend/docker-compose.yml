@@ -1,6 +1,6 @@
 services:
-  app:                    # The name of the service, can be anything
-    image: backend # Declares which image to use
-    build: .              # Declares where to build if image is not found
-    ports:                # Declares the ports to publish
+  app: # The name of the service, can be anything
+    image: todo-backend-prod # Declares which image to use
+    build: . # Declares where to build if image is not found
+    ports: # Declares the ports to publish
       - 3123:3000
